@@ -8,6 +8,8 @@
   <meta name="keywords" content="Richeng AI, 日晟聯合記帳士事務所, 日晟稅務AI, 記帳士, 會計師, 會計, 稅務, 公司設立, 商業登記, 記帳服務, 會計服務, 財稅顧問" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://www.richeng.com.tw/" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://www.richeng.com.tw/" />
+  <link rel="alternate" hreflang="en" href="https://www.richeng.com.tw/en/" />
   <meta name="theme-color" content="#050608" />
   <meta property="og:locale" content="zh_TW" />
   <meta property="og:type" content="website" />
@@ -1106,6 +1108,7 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      gap:8px;
       min-height:46px;
       padding:0 18px;
       border-radius:14px;
@@ -1144,6 +1147,61 @@
       background:transparent;
       color:var(--text);
       border-color:var(--line);
+    }
+
+    .btn-line{
+      min-width:220px;
+      padding:10px 16px;
+      border-color:rgba(40,201,92,.18);
+      background:linear-gradient(135deg, rgba(37,194,85,.98), rgba(0,176,0,.98));
+      color:#f8fff8;
+      box-shadow:0 14px 30px rgba(0,179,0,.12), 0 0 0 1px rgba(255,255,255,.03) inset;
+    }
+
+    .btn-line:hover{
+      border-color:rgba(40,201,92,.32);
+      box-shadow:0 18px 36px rgba(0,179,0,.16), 0 0 0 1px rgba(255,255,255,.06) inset;
+    }
+
+    .btn-line::before{
+      content:"LINE";
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:42px;
+      height:24px;
+      padding:0 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,.16);
+      color:#f8fff8;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.08em;
+      flex:0 0 auto;
+    }
+
+    .btn-line .btn-line-copy{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:2px;
+      line-height:1.05;
+      text-align:left;
+    }
+
+    .btn-line .btn-line-copy strong{
+      display:block;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:-.01em;
+    }
+
+    .btn-line .btn-line-copy span{
+      display:block;
+      font-size:10px;
+      font-weight:500;
+      letter-spacing:.02em;
+      opacity:.9;
     }
 
     .hero-note{
@@ -1303,7 +1361,8 @@
     .cta-side-visual img{
       width:100%;
       height:100%;
-      object-fit:cover;
+      object-fit:contain;
+      object-position:center center;
       display:block;
       animation:softFloat 14s ease-in-out infinite alternate;
     }
@@ -2167,16 +2226,19 @@
       }
 
       .hero-inner{
-        display:block;
+        display:flex;
+        flex-direction:column;
         min-height:unset;
       }
 
       .hero-panel{
-        margin-top:18px;
+        order:-1;
+        margin-top:0;
+        margin-bottom:16px;
       }
 
       .robot-core{
-        max-width:390px;
+        max-width:100%;
         margin-inline:auto;
       }
 
@@ -2188,8 +2250,8 @@
 
       .hero h1{
         max-width:100%;
-        min-height:2.55em;
-        font-size:clamp(18px, 5.7vw, 23px);
+        min-height:2.15em;
+        font-size:clamp(18px, 5.2vw, 22px);
         line-height:1.12;
         overflow-wrap:anywhere;
         word-break:normal;
@@ -2198,9 +2260,9 @@
       }
 
       .hero .lead{
-        min-height:5.1em;
-        font-size:12px;
-        line-height:1.72;
+        min-height:4.1em;
+        font-size:11px;
+        line-height:1.68;
         max-width:100%;
         overflow-wrap:anywhere;
         word-break:normal;
@@ -2234,8 +2296,8 @@
       }
 
       .hero-note{
-        font-size:12px;
-        line-height:1.72;
+        font-size:11px;
+        line-height:1.66;
         max-width:100%;
       }
 
@@ -2279,6 +2341,30 @@
 
       .contact-list span{
         text-align:left;
+      }
+
+      .cta-actions .btn,
+      .hero-actions .btn{
+        min-width:0;
+      }
+
+      .btn-line{
+        min-width:unset;
+        padding:9px 12px;
+      }
+
+      .btn-line::before{
+        min-width:34px;
+        height:20px;
+        font-size:9px;
+      }
+
+      .btn-line .btn-line-copy strong{
+        font-size:11px;
+      }
+
+      .btn-line .btn-line-copy span{
+        font-size:9px;
       }
     }
   </style>
@@ -2784,7 +2870,12 @@
             <h2>如果你想把財稅流程整理得更清楚，現在就可以開始。</h2>
             <p>歡迎先從 LINE 開始，或直接透過電話與 Email 聯繫。我們會依你的節奏，協助你把合作流程接上，讓每一步都更清楚。</p>
             <div class="cta-actions">
-              <a class="btn btn-primary" href="https://line.me/ti/p/@richeng" target="_blank" rel="noreferrer">Richeng AI 服務</a>
+              <a class="btn btn-primary btn-line" href="https://line.me/ti/p/@richeng" target="_blank" rel="noreferrer" aria-label="加入 Richeng AI 官方 LINE">
+                <span class="btn-line-copy">
+                  <strong>加入 Richeng AI 官方 LINE</strong>
+                  <span>點一下就能直接開啟對話</span>
+                </span>
+              </a>
               <a class="btn btn-ghost" href="tel:+88635543756">電話聯絡</a>
               <a class="btn btn-secondary" href="mailto:service@richeng.com.tw">Email 聯絡</a>
             </div>
@@ -2794,7 +2885,7 @@
               <li>
                 <a class="contact-link" href="https://line.me/ti/p/@richeng" target="_blank" rel="noreferrer">
                   <strong>LINE</strong>
-                  <span>Richeng AI 服務</span>
+                  <span>Richeng AI 官方 LINE</span>
                 </a>
               </li>
               <li>
@@ -3162,6 +3253,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
