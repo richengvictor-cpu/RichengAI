@@ -79,7 +79,7 @@
     ['黑、灰、白的秩序感', 'The order of black, gray and white'],
     ['穩定的底盤讓畫面回到秩序與留白，內容更清楚，品牌也更有重量。', 'A stable foundation brings the page back to order and breathing room, making the content clearer and the brand feel more substantial.'],
     ['識別色', 'Accent Color'],
-    ['Tiffany 藍綠只做點亮', 'Tiffany blue-green only for accents'],
+    ['冷銀灰只做點亮', 'Cool silver-gray only for accents'],
     ['只在重點、按鈕、線條與小型高亮處出現，讓品牌感有記憶點，但不會喧賓奪主。', 'Used only for highlights, buttons, lines and small focal points, it gives the brand a memorable accent without taking over the page.'],
     ['星空寓意', 'Starry Symbolism'],
     ['星河、流星、光暈代表進化', 'Star river, meteors and halo represent evolution'],
@@ -220,7 +220,7 @@
         { selector: '.hero .eyebrow', text: 'Richeng Certified Tax Accountants Firm' },
         { selector: '[data-hero-title]', text: 'Making tax services more precise as they evolve' },
         { selector: '[data-hero-lead]', text: 'Richeng AI combines 40 years of accounting-firm expertise with AI logic, preserving the stability and trust of a professional firm while turning complex tax, bookkeeping, accounting and business workflows into a clearer, more precise advisory experience.' },
-        { selector: '.hero-note', text: 'Black, white and gray remain the foundation, with a subtle Tiffany blue accent for identity, and a star river, meteors and halo as the symbol of continuous evolution.' }
+        { selector: '.hero-note', text: 'Black, white and gray remain the foundation, with a subtle silver-gray accent for identity, and a star river, meteors and halo as the symbol of continuous evolution.' }
       ],
       heroActions: ['Book a Consultation', 'View Services', 'FAQ'],
       heroStories: [
