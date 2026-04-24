@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Richeng AI｜日晟稅務AI 官方網站</title>
-  <meta name="description" content="Richeng AI｜日晟稅務AI，結合 40 年專業底蘊與 AI 協作，提供公司設立、商業登記、稅務服務、記帳服務與企業諮商。" />
+  <meta name="description" content="Richeng AI｜日晟稅務AI，以 40 年專業底蘊結合 AI 協作，為企業提供公司設立、商業登記、稅務服務、記帳服務與顧問支援，讓財稅流程更清楚、更精準、更有秩序。" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://www.richeng.com.tw/" />
   <meta name="theme-color" content="#050608" />
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Richeng AI｜日晟稅務AI" />
   <meta property="og:title" content="Richeng AI｜日晟稅務AI 官方網站" />
-  <meta property="og:description" content="黑、白、灰為主，搭配少量 Tiffany 藍綠識別的高級極簡 AI 稅務顧問品牌。" />
+  <meta property="og:description" content="Richeng AI｜日晟稅務AI，以黑、白、灰的高級基底與少量 Tiffany 藍綠識別，呈現星河、流星與光暈意象下的 AI 稅務顧問品牌。" />
   <meta property="og:url" content="https://www.richeng.com.tw/" />
   <meta property="og:image" content="https://www.richeng.com.tw/assets/homepage-ai-visuals/richeng-ai-hero-v5.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -336,6 +336,7 @@
     .hero-bg{
       position:absolute;
       inset:0;
+      z-index:0;
       background:
         radial-gradient(circle at 16% 22%, rgba(255,255,255,.08), transparent 14%),
         radial-gradient(circle at 26% 30%, rgba(89,212,204,.08), transparent 18%),
@@ -351,6 +352,7 @@
       inset:0;
       pointer-events:none;
       overflow:hidden;
+      z-index:2;
     }
 
     .hero-stars{
@@ -408,6 +410,96 @@
       filter:blur(.1px);
     }
 
+    .hero-stars-deep{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      opacity:.62;
+    }
+
+    .hero-stars-deep::before,
+    .hero-stars-deep::after{
+      content:"";
+      position:absolute;
+      inset:-12% -10%;
+      background-repeat:no-repeat;
+    }
+
+    .hero-stars-deep::before{
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.55) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(255,255,255,.45) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(255,255,255,.50) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(89,212,204,.42) 0 0.8px, transparent 1.2px),
+        radial-gradient(circle, rgba(255,255,255,.42) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(255,255,255,.46) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(89,212,204,.34) 0 0.8px, transparent 1.2px),
+        radial-gradient(circle, rgba(255,255,255,.40) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(255,255,255,.38) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(89,212,204,.30) 0 0.8px, transparent 1.2px),
+        radial-gradient(circle, rgba(255,255,255,.34) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(255,255,255,.30) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(255,255,255,.26) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(89,212,204,.24) 0 0.8px, transparent 1.2px),
+        radial-gradient(circle, rgba(255,255,255,.24) 0 0.8px, transparent 1.1px),
+        radial-gradient(circle, rgba(255,255,255,.20) 0 0.8px, transparent 1.1px);
+      background-size: 8% 8%, 7% 7%, 6% 6%, 5% 5%, 4% 4%, 6% 6%, 4% 4%, 3.5% 3.5%, 3.2% 3.2%, 3% 3%, 2.8% 2.8%, 2.6% 2.6%, 2.4% 2.4%, 2.2% 2.2%, 2% 2%, 1.8% 1.8%;
+      background-position: 5% 8%, 12% 26%, 18% 68%, 26% 42%, 34% 14%, 42% 76%, 49% 20%, 57% 58%, 64% 30%, 71% 84%, 78% 44%, 84% 16%, 89% 66%, 93% 28%, 96% 54%, 8% 92%;
+      animation:twinkle 15s ease-in-out infinite alternate;
+      filter:blur(.15px);
+    }
+
+    .hero-stars-deep::after{
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.36) 0 0.8px, transparent 1.05px),
+        radial-gradient(circle, rgba(255,255,255,.30) 0 0.8px, transparent 1.05px),
+        radial-gradient(circle, rgba(89,212,204,.26) 0 0.8px, transparent 1.15px),
+        radial-gradient(circle, rgba(255,255,255,.32) 0 0.8px, transparent 1.05px),
+        radial-gradient(circle, rgba(255,255,255,.34) 0 0.8px, transparent 1.05px),
+        radial-gradient(circle, rgba(89,212,204,.22) 0 0.8px, transparent 1.15px),
+        radial-gradient(circle, rgba(255,255,255,.28) 0 0.8px, transparent 1.05px),
+        radial-gradient(circle, rgba(255,255,255,.24) 0 0.8px, transparent 1.05px),
+        radial-gradient(circle, rgba(89,212,204,.20) 0 0.8px, transparent 1.15px),
+        radial-gradient(circle, rgba(255,255,255,.22) 0 0.8px, transparent 1.05px),
+        radial-gradient(circle, rgba(255,255,255,.18) 0 0.8px, transparent 1.05px),
+        radial-gradient(circle, rgba(255,255,255,.16) 0 0.8px, transparent 1.05px);
+      background-size: 4.5% 4.5%, 3.8% 3.8%, 3.6% 3.6%, 3.4% 3.4%, 3.2% 3.2%, 3% 3%, 2.8% 2.8%, 2.6% 2.6%, 2.4% 2.4%, 2.2% 2.2%, 2% 2%, 1.8% 1.8%;
+      background-position: 10% 18%, 18% 38%, 24% 62%, 36% 24%, 48% 84%, 58% 16%, 66% 48%, 74% 72%, 82% 32%, 88% 58%, 94% 22%, 6% 78%;
+      animation:twinkle 18s ease-in-out infinite alternate-reverse;
+      filter:blur(.22px);
+    }
+
+    .hero.peak-night .hero-stars::before{
+      opacity:1;
+      animation-duration:3.1s;
+      filter:drop-shadow(0 0 4px rgba(255,255,255,.14));
+    }
+
+    .hero.peak-night .hero-stars::after{
+      opacity:.98;
+      animation-duration:3.8s;
+      filter:blur(.16px) drop-shadow(0 0 5px rgba(255,255,255,.12));
+    }
+
+    .hero.peak-night .hero-stars-deep{
+      opacity:.92;
+    }
+
+    .hero.peak-night .hero-stars-deep::before{
+      animation-duration:4.6s;
+      opacity:.96;
+    }
+
+    .hero.peak-night .hero-stars-deep::after{
+      animation-duration:5.8s;
+      opacity:.90;
+    }
+
+    .hero.peak-night .hero-bg::before{
+      opacity:1;
+    }
+
     .meteor{
       position:absolute;
       height:3px;
@@ -416,11 +508,11 @@
         linear-gradient(90deg,
           rgba(255,255,255,0) 0%,
           rgba(255,255,255,.01) 30%,
-          rgba(255,255,255,.04) 50%,
-          rgba(255,255,255,.13) 68%,
-          rgba(255,255,255,.34) 82%,
-          rgba(89,212,204,.56) 92%,
-          rgba(255,255,255,.70) 100%);
+          rgba(255,255,255,.03) 48%,
+          rgba(255,255,255,.10) 66%,
+          rgba(255,255,255,.24) 80%,
+          rgba(89,212,204,.44) 90%,
+          rgba(255,255,255,.56) 100%);
       filter:drop-shadow(0 0 4px rgba(89,212,204,.12));
       opacity:0;
       transform-origin:right center;
@@ -433,27 +525,40 @@
       position:absolute;
       left:0;
       top:50%;
-      width:78%;
-      height:8px;
+      width:100%;
+      height:10px;
       transform:translateY(-50%);
       border-radius:999px;
       background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.01) 38%, rgba(89,212,204,.06) 72%, rgba(255,255,255,.18) 100%);
-      filter:blur(6px);
-      opacity:.38;
+      filter:blur(11px);
+      opacity:.36;
       pointer-events:none;
     }
 
     .meteor::after{
       content:"";
       position:absolute;
-      right:-12px;
-      top:-6px;
-      width:16px;
-      height:12px;
+      right:-18px;
+      top:-9px;
+      width:26px;
+      height:18px;
       border-radius:50%;
-      background:radial-gradient(circle, rgba(255,255,255,.30), rgba(255,255,255,.16) 30%, rgba(89,212,204,.06) 58%, transparent 76%);
-      filter:blur(2px);
+      background:radial-gradient(circle, rgba(255,255,255,.30), rgba(255,255,255,.16) 30%, rgba(89,212,204,.06) 58%, transparent 78%);
+      filter:blur(4.5px);
       animation:meteorGlow 3.4s linear forwards;
+    }
+
+    .hero.peak-night .meteor{
+      filter:drop-shadow(0 0 6px rgba(89,212,204,.20));
+    }
+
+    .hero.peak-night .meteor::before{
+      opacity:.58;
+      filter:blur(8.5px);
+    }
+
+    .hero.peak-night .meteor::after{
+      opacity:.74;
     }
 
     .hero-bg::before{
@@ -502,6 +607,7 @@
     .hero-overlay{
       position:absolute;
       inset:0;
+      z-index:1;
       background:
         linear-gradient(90deg, rgba(5,6,8,.92) 0%, rgba(5,6,8,.76) 22%, rgba(5,6,8,.32) 52%, rgba(5,6,8,.78) 100%),
         linear-gradient(180deg, rgba(5,6,8,.18), rgba(5,6,8,.18));
@@ -524,22 +630,21 @@
       position:absolute;
       inset:-12% -8%;
       background:
-        radial-gradient(circle at 24% 22%, rgba(89,212,204,.08), transparent 24%),
-        radial-gradient(circle at 31% 34%, rgba(255,255,255,.08), transparent 20%),
-        radial-gradient(circle at 42% 48%, rgba(255,255,255,.05), transparent 28%),
+        radial-gradient(circle at 34% 48%, rgba(5,6,8,.72) 0 13%, rgba(5,6,8,.44) 26%, rgba(5,6,8,.12) 42%, transparent 60%),
         radial-gradient(circle at 76% 24%, rgba(255,255,255,.08), transparent 16%),
         radial-gradient(circle at 81% 56%, rgba(89,212,204,.10), transparent 20%),
         radial-gradient(circle at 50% 72%, rgba(255,255,255,.05), transparent 22%),
+        radial-gradient(circle at 24% 20%, rgba(89,212,204,.05), transparent 24%),
         linear-gradient(90deg, transparent 0 48%, rgba(255,255,255,.035) 48% 48.3%, transparent 48.3% 100%);
-      filter:blur(12px);
-      opacity:.88;
+      filter:blur(14px);
+      opacity:.92;
       animation:haloPulse 11s ease-in-out infinite alternate;
       pointer-events:none;
     }
 
     .hero-inner{
       position:relative;
-      z-index:1;
+      z-index:3;
       min-height:720px;
       display:grid;
       grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);
@@ -804,6 +909,32 @@
       color:var(--text);
       font-size:13px;
       line-height:1.8;
+    }
+
+    .meteor-story{
+      display:grid;
+      gap:8px;
+      padding:16px 18px;
+      border-radius:20px;
+      border:1px solid rgba(89,212,204,.18);
+      background:linear-gradient(180deg, rgba(89,212,204,.06), rgba(255,255,255,.035));
+      box-shadow:0 0 0 1px rgba(255,255,255,.02), var(--shadow-soft);
+      animation:fadeUp 1s ease .24s both;
+    }
+
+    .meteor-story strong{
+      font-size:13px;
+      letter-spacing:.03em;
+      color:var(--ink);
+    }
+
+    .meteor-story span{
+      color:var(--text);
+      font-size:12px;
+      line-height:1.75;
+      text-wrap:balance;
+      word-break:keep-all;
+      line-break:strict;
     }
 
     .hero-meta{
@@ -1729,16 +1860,17 @@
 
     <section class="hero" aria-label="Hero">
       <div class="hero-bg">
+        <div class="hero-stars-deep" aria-hidden="true"></div>
         <div class="hero-stars" aria-hidden="true"></div>
-        <div class="hero-meteor" aria-hidden="true"></div>
       </div>
       <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-meteor" aria-hidden="true"></div>
       <div class="hero-inner">
         <div class="hero-copy">
-          <div class="eyebrow">AI 稅務顧問品牌</div>
-          <h1>讓財稅流程更清楚</h1>
+          <div class="eyebrow">星河中的財稅秩序</div>
+          <h1>讓財稅服務在進化中更精準</h1>
           <p class="lead">
-            Richeng AI｜日晟稅務AI，結合 40 年專業底蘊與 AI 協作，協助企業把登記、記帳與申報做得更精準、更穩定。
+            Richeng AI｜日晟稅務AI 以 40 年專業底蘊結合 AI 邏輯，將繁複的財稅流程整理成更清楚、更精準、更有秩序的顧問體驗。
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contact">預約諮詢</a>
@@ -1746,7 +1878,7 @@
             <a class="btn btn-ghost" href="#faq">常見問題</a>
           </div>
           <p class="hero-note">
-            以黑、白、灰為主，搭配少量 Tiffany 藍綠作識別，呈現安靜、專業而有秩序的品牌感。
+            以黑、白、灰為主，搭配少量 Tiffany 藍綠作識別，並以星河、流星與光暈作為持續進化的象徵。
           </p>
         </div>
 
@@ -1762,11 +1894,39 @@
             <strong>服務重點</strong>
             <span>從公司設立到稅務記帳，讓每一步更清楚，合作更順暢。</span>
           </div>
+          <div class="meteor-story" aria-live="polite">
+            <strong data-meteor-name>Leonids 獅子座流星雨</strong>
+            <span data-meteor-copy>峰值夜、效率、快速劃過，像 Richeng AI 把複雜流程在最短時間整理成秩序。</span>
+          </div>
           <div class="hero-meta">
             <div class="mini-row"><strong>主要服務</strong><span>登記 / 記帳 / 申報</span></div>
             <div class="mini-row"><strong>合作方式</strong><em>AI 協作 + 專業判斷</em></div>
             <div class="mini-row"><strong>品牌感受</strong><span>清楚、穩定、可信任</span></div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="concept">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">00 / 品牌理念</div>
+            <h2>在浩瀚的商業宇宙裡，持續把財稅服務做得更好</h2>
+          </div>
+          <p>Richeng AI 不是只把帳做好，而是把服務做成一套能長期陪伴企業前行的專業系統。</p>
+        </div>
+        <div class="split">
+          <article class="card">
+            <div class="tag">設計概念</div>
+            <h3>高級極簡，不只為了好看</h3>
+            <p>黑、灰、白的穩定底盤，讓畫面回到秩序與信任；少量 Tiffany 藍綠只做識別點亮，不搶走內容主角的位置。</p>
+          </article>
+          <article class="card">
+            <div class="tag">視覺象徵</div>
+            <h3>星河、流星、光暈，代表持續進化</h3>
+            <p>星空不是裝飾，而是比喻：我們陪伴過無數大小企業，在時間中累積經驗，也在變動中持續前進。</p>
+          </article>
         </div>
       </div>
     </section>
@@ -1778,7 +1938,7 @@
             <div class="eyebrow">01 / 核心服務</div>
             <h2>核心服務，從登記到記帳一次到位</h2>
           </div>
-          <p>公司設立、商業登記、稅務申報與帳務整理，整合成清楚的服務路徑，讓企業從第一步就知道怎麼前進。</p>
+          <p>公司設立、商業登記、稅務申報與帳務整理，整合成清楚的服務路徑，讓企業在清楚的節奏中開始，在穩定的秩序中前進。</p>
         </div>
         <div class="section-visual">
           <img src="assets/homepage-ai-visuals/richeng-ai-services-corrected-v1.png" alt="Richeng AI 核心服務視覺，呈現公司設立、商業登記與稅務記帳流程" loading="lazy" decoding="async" />
@@ -1787,17 +1947,17 @@
           <article class="card">
             <div class="tag">公司登記</div>
             <h3>公司登記服務</h3>
-            <p>協助企業完成公司、分公司與各類組織登記，讓成立與變更流程更清楚、更有效率。</p>
+            <p>協助企業完成公司、分公司與各類組織登記，讓成立、變更與後續申辦流程更清楚，也更容易持續管理。</p>
           </article>
           <article class="card">
             <div class="tag">商業登記</div>
             <h3>商業登記服務</h3>
-            <p>針對中小企業、工作室、餐飲業、診所與補教業提供合適的登記與申辦協助。</p>
+            <p>針對中小企業、工作室、餐飲業、診所與補教業提供合適的登記與申辦協助，讓不同規模的企業都能找到適合的起點。</p>
           </article>
           <article class="card">
             <div class="tag">稅務記帳</div>
             <h3>稅務與記帳服務</h3>
-            <p>從帳務處理、稅務申報到國內外稅務規劃，維持專業、合規與流程穩定。</p>
+            <p>從帳務處理、稅務申報到國內外稅務規劃，維持專業、合規與流程穩定，讓數字更清楚，也更容易追蹤。</p>
           </article>
         </div>
       </div>
@@ -2206,7 +2366,8 @@
           <h3>40 年專業底子，結合 AI 讓稅務與記帳更精準。</h3>
           <p>
             日晟聯合記帳士事務所自 1985 年創立以來，持續深耕公司登記、商業登記、稅務服務、記帳服務、企業諮商與其他專業服務。
-            現在以 Richeng AI 的品牌形式，持續把專業、效率與信任感整合成更清楚的顧問體驗。
+            現在以 Richeng AI 的品牌形式，將繁複的財稅流程整理成更清楚、更精準、更有秩序的顧問體驗。
+            星河、流星與光暈則象徵我們在時間裡持續進化，也持續陪伴企業前進。
           </p>
           <div class="footer-rail">
             <span>www.richeng.com.tw</span>
@@ -2260,26 +2421,79 @@
       const rand = (min, max) => Math.random() * (max - min) + min;
       const pick = (items) => items[Math.floor(Math.random() * items.length)];
 
-      const patterns = [
-        { sx: [-8, 12], sy: [12, 30], ex: [78, 112], ey: [28, 72] },
-        { sx: [88, 112], sy: [14, 30], ex: [-8, 18], ey: [22, 64] },
-        { sx: [18, 42], sy: [-8, 12], ex: [58, 88], ey: [72, 112] },
-        { sx: [58, 84], sy: [-8, 12], ex: [14, 42], ey: [70, 112] }
+      const meteorStoryName = document.querySelector('[data-meteor-name]');
+      const meteorStoryCopy = document.querySelector('[data-meteor-copy]');
+      const meteorStories = [
+        {
+          name: 'Leonids 獅子座流星雨',
+          copy: '峰值夜、效率、快速劃過，最適合代表 Richeng AI 的速度感與高峰爆發。'
+        },
+        {
+          name: 'Perseids 英仙座流星雨',
+          copy: '高效率、快速、明亮、長尾，像把繁複流程拉出清楚而俐落的軌跡。'
+        },
+        {
+          name: 'Orionids 獵戶座流星雨',
+          copy: '速度感很強、畫面乾淨漂亮，適合表現高級而有未來感的顧問品牌。'
+        },
+        {
+          name: 'Geminids 雙子座流星雨',
+          copy: '穩定、存在感強，象徵長期合作與持續陪伴企業前進。'
+        },
+        {
+          name: 'Lyrids 天琴座流星雨',
+          copy: '帶有歷史感與傳承感，適合代表老字號升級成 AI 品牌的穩定底子。'
+        }
+      ];
+
+      const paintMeteorStory = () => {
+        if (!meteorStoryName || !meteorStoryCopy) return;
+        const story = pick(meteorStories);
+        meteorStoryName.textContent = story.name;
+        meteorStoryCopy.textContent = story.copy;
+      };
+
+      const radiant = {
+        x: [82, 98],
+        y: [4, 14]
+      };
+      const spread = [
+        { x: [-12, 18], y: [32, 70] },
+        { x: [4, 36], y: [54, 94] },
+        { x: [-4, 28], y: [14, 50] },
+        { x: [18, 54], y: [62, 100] }
       ];
 
       let busy = false;
+      let peakUntil = 0;
+
+      const inPeak = () => Date.now() < peakUntil;
+
+      const maybeStartPeak = () => {
+        if (inPeak()) return;
+        if (Math.random() < 0.24) {
+          peakUntil = Date.now() + rand(6000, 9000);
+          hero.classList.add('peak-night');
+          window.setTimeout(() => {
+            if (!inPeak()) hero.classList.remove('peak-night');
+          }, 11000);
+        }
+      };
 
       const spawn = () => {
         if (busy) return;
         busy = true;
 
-        const rect = hero.getBoundingClientRect();
-        const pattern = pick(patterns);
+        paintMeteorStory();
+        maybeStartPeak();
 
-        const sx = rect.width * rand(pattern.sx[0] / 100, pattern.sx[1] / 100);
-        const sy = rect.height * rand(pattern.sy[0] / 100, pattern.sy[1] / 100);
-        const ex = rect.width * rand(pattern.ex[0] / 100, pattern.ex[1] / 100);
-        const ey = rect.height * rand(pattern.ey[0] / 100, pattern.ey[1] / 100);
+        const rect = hero.getBoundingClientRect();
+        const pattern = pick(spread);
+
+        const sx = rect.width * rand(radiant.x[0] / 100, radiant.x[1] / 100);
+        const sy = rect.height * rand(radiant.y[0] / 100, radiant.y[1] / 100);
+        const ex = rect.width * rand(pattern.x[0] / 100, pattern.x[1] / 100);
+        const ey = rect.height * rand(pattern.y[0] / 100, pattern.y[1] / 100);
         const dx = ex - sx;
         const dy = ey - sy;
         const angle = Math.atan2(dy, dx) * 180 / Math.PI;
@@ -2291,9 +2505,9 @@
         meteor.style.setProperty('--dx', `${dx}px`);
         meteor.style.setProperty('--dy', `${dy}px`);
         meteor.style.setProperty('--rot', `${angle}deg`);
-        meteor.style.width = `${rand(140, 200)}px`;
+        meteor.style.width = `${rand(176, 264)}px`;
         meteor.style.height = `${rand(2.2, 2.8)}px`;
-        meteor.style.animationDuration = `${rand(1.05, 1.2)}s`;
+        meteor.style.animationDuration = `${rand(1.05, 1.22)}s`;
         meteor.style.filter = 'drop-shadow(0 0 3px rgba(89,212,204,.10))';
         meteor.style.opacity = '0';
 
@@ -2302,11 +2516,14 @@
         meteor.addEventListener('animationend', () => {
           meteor.remove();
           busy = false;
-          window.setTimeout(spawn, rand(7000, 16000));
+          const delay = inPeak() ? rand(250, 650) : rand(7000, 16000);
+          if (!inPeak()) hero.classList.remove('peak-night');
+          window.setTimeout(spawn, delay);
         }, { once: true });
       };
 
-      spawn();
+      paintMeteorStory();
+      window.setTimeout(spawn, rand(220, 700));
     })();
   </script>
 </body>
