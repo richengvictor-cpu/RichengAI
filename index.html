@@ -293,6 +293,33 @@
         filter:blur(var(--blur-end, 0px)) drop-shadow(0 0 8px rgba(89,212,204,.18));
       }
     }
+    @keyframes meteorFlyMobileClean{
+      0%{
+        opacity:0;
+        transform:translate3d(0,0,0) rotate(var(--rot, 18deg)) scale(var(--scale-start, .54));
+        filter:blur(.02px) drop-shadow(0 0 2px rgba(89,212,204,.08));
+      }
+      22%{
+        opacity:0;
+      }
+      34%{
+        opacity:.10;
+      }
+      48%{
+        opacity:.46;
+      }
+      68%{
+        opacity:.84;
+      }
+      84%{
+        opacity:.72;
+      }
+      100%{
+        opacity:0;
+        transform:translate3d(calc(var(--dx, 880px) * 1), calc(var(--dy, 420px) * 1), 0) rotate(var(--rot, 18deg)) scale(var(--scale-end, 1.16));
+        filter:blur(0px) drop-shadow(0 0 3px rgba(89,212,204,.10));
+      }
+    }
     @keyframes meteorGlow{
       0%{ opacity:0; transform:scale(.55); }
       14%{ opacity:0; transform:scale(.62); }
@@ -329,6 +356,8 @@
     }
 
     .topbar{
+      position:relative;
+      overflow:hidden;
       display:flex;
       flex-wrap:nowrap;
       justify-content:space-between;
@@ -337,9 +366,53 @@
       padding:13px 16px;
       border-radius:999px;
       border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
+      background:
+        radial-gradient(circle at 18% 32%, rgba(255,255,255,.12) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 36% 58%, rgba(89,212,204,.12) 0 1px, transparent 1.7px),
+        radial-gradient(circle at 62% 26%, rgba(255,255,255,.10) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 78% 46%, rgba(255,255,255,.08) 0 1px, transparent 1.6px),
+        radial-gradient(circle at 88% 18%, rgba(89,212,204,.10) 0 1px, transparent 1.7px),
+        linear-gradient(180deg, rgba(6,7,8,.72) 0%, rgba(6,7,8,.50) 42%, rgba(6,7,8,.22) 100%);
       backdrop-filter:blur(12px);
       box-shadow:var(--shadow-soft);
+    }
+
+    .topbar::before,
+    .topbar::after{
+      content:"";
+      position:absolute;
+      inset:-18% -10%;
+      pointer-events:none;
+    }
+
+    .topbar::before{
+      background:
+        radial-gradient(circle at 12% 28%, rgba(255,255,255,.26) 0 1px, transparent 1.4px),
+        radial-gradient(circle at 22% 72%, rgba(255,255,255,.14) 0 1px, transparent 1.4px),
+        radial-gradient(circle at 46% 22%, rgba(89,212,204,.20) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 58% 62%, rgba(255,255,255,.16) 0 1px, transparent 1.4px),
+        radial-gradient(circle at 72% 34%, rgba(255,255,255,.20) 0 1px, transparent 1.4px),
+        radial-gradient(circle at 84% 58%, rgba(89,212,204,.16) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 92% 20%, rgba(255,255,255,.12) 0 1px, transparent 1.4px);
+      background-repeat:no-repeat;
+      opacity:.34;
+      filter:blur(.12px);
+      animation:distantTwinkle 16s ease-in-out infinite alternate;
+    }
+
+    .topbar::after{
+      background:
+        linear-gradient(180deg, rgba(2,3,5,.42) 0%, rgba(2,3,5,.18) 54%, transparent 100%),
+        linear-gradient(110deg, transparent 18%, rgba(89,212,204,.06) 50%, transparent 80%),
+        radial-gradient(circle at 76% 34%, rgba(255,255,255,.05), transparent 22%),
+        radial-gradient(circle at 24% 66%, rgba(255,255,255,.04), transparent 18%);
+      opacity:.48;
+      filter:blur(6px);
+    }
+
+    .topbar > *{
+      position:relative;
+      z-index:1;
     }
 
     .topnav{
@@ -2727,56 +2800,74 @@
 
     @media (max-width:760px){
       .page{
-        width:min(100%, calc(100% - 18px));
-        padding-top:14px;
+        width:min(100%, calc(100% - 14px));
+        padding-top:10px;
       }
 
       .topbar{
-        padding:11px 12px;
-        border-radius:24px;
+        display:flex;
         flex-direction:column;
         align-items:stretch;
         gap:10px;
+        padding:16px 14px;
+        border-radius:28px;
+        background:
+          radial-gradient(circle at 18% 28%, rgba(255,255,255,.08) 0 1px, transparent 1.6px),
+          radial-gradient(circle at 74% 42%, rgba(89,212,204,.08) 0 1px, transparent 1.7px),
+          linear-gradient(180deg, rgba(6,7,8,.76) 0%, rgba(6,7,8,.56) 44%, rgba(6,7,8,.22) 100%);
+        border-color:rgba(255,255,255,.05);
+        box-shadow:0 24px 48px rgba(0,0,0,.58);
       }
 
-      .site-tag{
-        display:none;
+      .brand{
+        width:100%;
+        min-width:0;
+        align-items:center;
+        gap:10px;
       }
 
       .topnav{
         width:100%;
         display:grid;
         grid-template-columns:repeat(3, minmax(0, 1fr));
-        gap:6px 8px;
+        gap:5px;
         overflow:visible;
         margin-top:0;
       }
 
-      .brand{
-        width:100%;
+      .site-tag{
+        display:none;
       }
 
       .topnav a{
         width:100%;
-        padding:7px 6px;
-        font-size:9px;
+        min-height:44px;
+        padding:6px 4px;
+        border-radius:14px;
+        background:rgba(255,255,255,.025);
+        border-color:rgba(255,255,255,.04);
+        font-size:10px;
+        font-weight:600;
         text-align:center;
         white-space:normal;
-        line-height:1.2;
+        line-height:1.1;
+        display:flex;
+        align-items:center;
+        justify-content:center;
       }
 
       .brand-logo{
-        width:clamp(92px, 30vw, 130px);
+        width:clamp(100px, 30vw, 136px);
       }
 
       .brand-copy strong{
-        font-size:13px;
+        font-size:14px;
       }
 
       .brand-copy span{
-        font-size:10px;
+        font-size:9px;
         margin-top:3px;
-        letter-spacing:.10em;
+        letter-spacing:.08em;
       }
 
       .footer-brand .brand{
@@ -2869,8 +2960,8 @@
 
       .hero-overlay{
         background:
-          linear-gradient(90deg, rgba(2,3,5,.74) 0%, rgba(2,3,5,.48) 22%, rgba(2,3,5,.18) 52%, rgba(2,3,5,.48) 100%),
-          linear-gradient(180deg, rgba(2,3,5,.10), rgba(2,3,5,.10));
+          linear-gradient(90deg, rgba(2,3,5,.92) 0%, rgba(2,3,5,.70) 22%, rgba(2,3,5,.24) 52%, rgba(2,3,5,.68) 100%),
+          linear-gradient(180deg, rgba(2,3,5,.16), rgba(2,3,5,.16));
       }
 
       .hero-copy{
@@ -2890,26 +2981,59 @@
       }
 
       .core-grid{
-        display:none;
+        display:block;
+        left:18%;
+        right:18%;
+        top:18%;
+        bottom:18%;
+        border-radius:50%;
+        background:
+          linear-gradient(90deg, transparent 0 49.4%, rgba(89,212,204,.18) 49.4% 50.6%, transparent 50.6% 100%),
+          linear-gradient(180deg, transparent 0 49.4%, rgba(89,212,204,.18) 49.4% 50.6%, transparent 50.6% 100%),
+          radial-gradient(circle at 50% 50%, rgba(89,212,204,.05), transparent 58%);
+        opacity:.26;
+        filter:blur(.15px);
+        mix-blend-mode:screen;
+        animation:orbitDrift 34s ease-in-out infinite alternate;
       }
 
       .core-brain{
-        left:36%;
-        right:36%;
-        top:36%;
-        bottom:36%;
+        left:33%;
+        right:33%;
+        top:33%;
+        bottom:33%;
         opacity:.88;
       }
 
       .core-arc{
-        display:none;
+        left:20%;
+        right:20%;
+        top:20%;
+        bottom:20%;
+        display:block;
+        border-radius:50%;
+        background:
+          conic-gradient(from 18deg,
+            transparent 0 10%,
+            rgba(255,255,255,.08) 10% 11.5%,
+            transparent 11.5% 24%,
+            rgba(89,212,204,.08) 24% 26%,
+            transparent 26% 43%,
+            rgba(255,255,255,.06) 43% 44.5%,
+            transparent 44.5% 66%,
+            rgba(89,212,204,.07) 66% 68%,
+            transparent 68% 100%);
+        opacity:.22;
+        filter:blur(.35px);
+        mix-blend-mode:screen;
+        animation:orbitDrift 24s ease-in-out infinite alternate;
       }
 
       .core-pulse{
-        left:26%;
-        right:26%;
-        top:26%;
-        bottom:26%;
+        left:29%;
+        right:29%;
+        top:29%;
+        bottom:29%;
       }
 
       .robot-core .orbit{
@@ -2917,59 +3041,54 @@
       }
 
       .sun-track{
-        inset:13% 12% 15% 10%;
+        inset:11% 10% 13% 8%;
       }
 
       .moon-track{
-        inset:16% 10% 11% 14%;
+        inset:14% 8% 9% 12%;
       }
 
       .robot-core .sun{
-        width:10%;
-        height:10%;
-        left:10%;
-        top:18%;
+        width:13%;
+        height:13%;
+        left:8%;
+        top:15%;
       }
 
       .robot-core .moon{
-        width:9%;
-        height:9%;
-        right:10%;
-        bottom:14%;
+        width:12%;
+        height:12%;
+        right:8%;
+        bottom:11%;
       }
 
       .meteor{
-        height:4px;
+        height:5px;
         opacity:1;
-        filter:drop-shadow(0 0 14px rgba(89,212,204,.34));
-        animation:meteorFlyMobile var(--meteor-duration, 2.08s) linear forwards;
+        filter:drop-shadow(0 0 9px rgba(89,212,204,.24));
+        animation:meteorFlyMobileClean var(--meteor-duration, 2.08s) linear forwards;
       }
 
       .meteor.meteor-feature{
-        height:7px;
+        height:6px;
         opacity:1;
-        filter:drop-shadow(0 0 22px rgba(89,212,204,.52));
+        filter:drop-shadow(0 0 12px rgba(89,212,204,.30));
         animation-duration:2.54s;
       }
 
       .meteor.meteor-feature::before{
-        height:42px;
-        width:240%;
-        opacity:.74;
+        height:26px;
+        width:180%;
+        opacity:.48;
         filter:blur(2px);
       }
 
       .meteor.meteor-feature::after{
-        width:92px;
-        height:60px;
-        opacity:1;
-        filter:blur(1px);
-        animation:meteorGlowMobile var(--meteor-duration, 2.54s) linear forwards;
+        display:none;
       }
 
       .meteor::after{
-        animation:meteorGlowMobile var(--meteor-duration, 2.08s) linear forwards;
-        opacity:0;
+        display:none;
       }
 
       .hero h1{
@@ -3236,6 +3355,7 @@
         <div class="brand-copy">
           <strong>Richeng AI</strong>
           <span>日晟聯合記帳士事務所</span>
+          <span>RICHENG ACCOUNTING FIRM.</span>
         </div>
       </div>
       <nav class="topnav" aria-label="主導覽">
@@ -3772,6 +3892,7 @@
             <div class="brand-copy">
               <strong>Richeng AI</strong>
               <span>日晟聯合記帳士事務所</span>
+              <span>RICHENG ACCOUNTING FIRM.</span>
             </div>
           </div>
           <h3>40 多年專業底子，結合 AI 讓財稅與記帳更精準。</h3>
@@ -3780,12 +3901,6 @@
             現在以 Richeng AI 的品牌形式，保留事務所級的專業與信任，同時把繁複的財稅流程整理成更清楚、更精準、更有秩序的顧問體驗。
             星河、衛星與十字線則象徵我們在時間裡持續進化，也持續陪伴企業前進。
           </p>
-          <div class="footer-rail">
-            <span>https://www.richeng.com.tw</span>
-            <span>service@richeng.com.tw</span>
-            <span>Richeng AI 服務</span>
-            <span>+886-3-5543756</span>
-          </div>
         </div>
         <div class="footer-links">
           <div class="footer-link">
@@ -3821,7 +3936,6 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <span>版權所有 © 2026 Richeng AI｜日晟聯合記帳士事務所，保留所有權利。</span>
           <span>Copyright © 2026 Richeng AI｜日晟聯合記帳士事務所. All rights reserved.</span>
         </div>
       </div>
@@ -4027,7 +4141,7 @@
       };
 
       const spawn = (forceFeature = false, forcedPatternIndex = null) => {
-        if (activeMeteors >= 3) return;
+        if (activeMeteors >= (mobileViewport ? 1 : 3)) return;
 
         paintMeteorStory();
         maybeStartPeak();
@@ -4124,19 +4238,14 @@
 
       paintMeteorStory();
       if (mobileViewport) {
-        hero.classList.add('peak-night');
         let mobileMeteorIndex = 0;
         const kickMobileMeteor = () => {
-          spawn(true, mobileMeteorIndex % 2 === 0 ? 1 : 2);
+          spawn(mobileMeteorIndex % 3 === 0, mobileMeteorIndex % 3);
           mobileMeteorIndex += 1;
         };
-        window.setTimeout(kickMobileMeteor, 140);
-        window.setTimeout(kickMobileMeteor, 780);
-        window.setTimeout(() => spawn(true, 1), 5800);
-        window.setInterval(kickMobileMeteor, 2200);
-        window.setTimeout(() => {
-          if (!inPeak()) hero.classList.remove('peak-night');
-        }, 4200);
+        window.setTimeout(kickMobileMeteor, 680);
+        window.setTimeout(kickMobileMeteor, 4900);
+        window.setInterval(kickMobileMeteor, 6200);
       } else {
         window.setTimeout(spawn, rand(240, 900));
       }
