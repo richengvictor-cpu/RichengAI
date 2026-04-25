@@ -3448,16 +3448,109 @@
         meteorStoryCopy.textContent = story.copy;
       };
 
+      let meteorStoryTimer = 0;
+      const scheduleMeteorStory = () => {
+        paintMeteorStory();
+        window.clearTimeout(meteorStoryTimer);
+        meteorStoryTimer = window.setTimeout(scheduleMeteorStory, rand(3000, 5000));
+      };
+
       const radiant = {
         x: [86, 99],
         y: [0, 9]
       };
-      const spread = [
-        { x: [-12, 18], y: [32, 70] },
-        { x: [4, 36], y: [54, 94] },
-        { x: [-4, 28], y: [14, 50] },
-        { x: [18, 54], y: [62, 100] }
+      const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+      const meteorRoutes = [
+        {
+          label: 'right-flat',
+          sx: [82, 98],
+          sy: [8, 22],
+          dx: [-92, -60],
+          dy: [-4, 4],
+          angleFactor: .64,
+          depthShift: -1
+        },
+        {
+          label: 'right-down-left',
+          sx: [76, 97],
+          sy: [18, 34],
+          dx: [-80, -46],
+          dy: [22, 54],
+          angleFactor: .76,
+          depthShift: 0
+        },
+        {
+          label: 'right-up-left',
+          sx: [76, 96],
+          sy: [28, 48],
+          dx: [-78, -42],
+          dy: [-58, -18],
+          angleFactor: .76,
+          depthShift: 1
+        },
+        {
+          label: 'left-down-right',
+          sx: [2, 18],
+          sy: [14, 28],
+          dx: [58, 96],
+          dy: [18, 60],
+          angleFactor: .72,
+          depthShift: 0
+        },
+        {
+          label: 'left-up-right',
+          sx: [2, 18],
+          sy: [34, 54],
+          dx: [58, 96],
+          dy: [-58, -16],
+          angleFactor: .72,
+          depthShift: -1
+        },
+        {
+          label: 'core-near',
+          sx: [64, 90],
+          sy: [22, 42],
+          dx: [-72, -32],
+          dy: [-10, 10],
+          angleFactor: .86,
+          depthShift: 1
+        },
+        {
+          label: 'front-back',
+          sx: [58, 82],
+          sy: [10, 28],
+          dx: [-34, 30],
+          dy: [18, 66],
+          angleFactor: .42,
+          depthShift: 2
+        },
+        {
+          label: 'back-front',
+          sx: [22, 46],
+          sy: [18, 42],
+          dx: [-20, 24],
+          dy: [-54, -18],
+          angleFactor: .48,
+          depthShift: -2
+        }
       ];
+
+      const routeByViewport = (pattern) => {
+        const widen = isCompactHero ? 1.54 : 1.24;
+        const sourceYMin = clamp(pattern.sy[0], 6, 62);
+        const sourceYMax = clamp(pattern.sy[1], sourceYMin + 4, 68);
+        const sourceXMin = clamp(pattern.sx[0] - 3, 36, 98);
+        const sourceXMax = clamp(pattern.sx[1] + (isCompactHero ? 2 : 0), sourceXMin + 4, 99);
+        return {
+          label: pattern.label,
+          sx: [sourceXMin, sourceXMax],
+          sy: [sourceYMin, sourceYMax],
+          dx: [pattern.dx[0] * widen, pattern.dx[1] * widen],
+          dy: [pattern.dy[0] * (isCompactHero ? .52 : .90), pattern.dy[1] * (isCompactHero ? .52 : .90)],
+          angleFactor: pattern.angleFactor,
+          depthShift: pattern.depthShift || 0
+        };
+      };
 
       let activeMeteors = 0;
       let peakUntil = 0;
@@ -3495,21 +3588,20 @@
       const spawn = (fromPeakBurst = false) => {
         if (activeMeteors >= 3) return;
 
-        paintMeteorStory();
         if (!fromPeakBurst) maybeStartPeak();
 
         const rect = hero.getBoundingClientRect();
-        const nextPatternIndex = (lastPatternIndex + 1 + Math.floor(rand(0, spread.length - 0.01))) % spread.length;
-        const pattern = spread[nextPatternIndex];
+        const nextPatternIndex = (lastPatternIndex + 1 + Math.floor(rand(0, meteorRoutes.length - 0.01))) % meteorRoutes.length;
+        const pattern = routeByViewport(meteorRoutes[nextPatternIndex]);
         lastPatternIndex = nextPatternIndex;
 
         const sx = rect.width * rand(radiant.x[0] / 100, radiant.x[1] / 100);
         const sy = rect.height * rand(radiant.y[0] / 100, radiant.y[1] / 100);
-        const ex = rect.width * rand(pattern.x[0] / 100, pattern.x[1] / 100);
-        const ey = rect.height * rand(pattern.y[0] / 100, pattern.y[1] / 100);
+        const ex = rect.width * rand(pattern.dx[0] / 100, pattern.dx[1] / 100);
+        const ey = rect.height * rand(pattern.dy[0] / 100, pattern.dy[1] / 100);
         const dx = ex - sx;
         const dy = ey - sy;
-        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        const angle = Math.atan2(dy * (pattern.angleFactor || .72), dx) * 180 / Math.PI;
         const depthMode = pick(['far', 'mid', 'close']);
         const depthPreset = depthMode === 'far'
           ? (isCompactHero
@@ -3520,8 +3612,15 @@
               ? { zStart: rand(-260, -150), zEnd: rand(50, 110), scaleStart: rand(.48, .62), scaleEnd: rand(1.08, 1.22), blurStart: rand(1.4, 2.0), blurEnd: rand(.06, .14), width: rand(110, 156), height: rand(1.5, 1.9) }
               : { zStart: rand(-300, -170), zEnd: rand(60, 130), scaleStart: rand(.50, .68), scaleEnd: rand(1.18, 1.38), blurStart: rand(1.8, 2.6), blurEnd: rand(.08, .18), width: rand(160, 236), height: rand(2.0, 2.5) })
             : (isCompactHero
-              ? { zStart: rand(-200, -95), zEnd: rand(90, 170), scaleStart: rand(.56, .76), scaleEnd: rand(1.12, 1.28), blurStart: rand(1.1, 1.6), blurEnd: rand(.05, .12), width: rand(130, 182), height: rand(1.6, 2.05) }
+            ? { zStart: rand(-200, -95), zEnd: rand(90, 170), scaleStart: rand(.56, .76), scaleEnd: rand(1.12, 1.28), blurStart: rand(1.1, 1.6), blurEnd: rand(.05, .12), width: rand(130, 182), height: rand(1.6, 2.05) }
               : { zStart: rand(-220, -100), zEnd: rand(120, 220), scaleStart: rand(.60, .82), scaleEnd: rand(1.26, 1.58), blurStart: rand(1.2, 1.9), blurEnd: rand(.06, .16), width: rand(190, 286), height: rand(2.1, 2.8) });
+        depthPreset.zStart += (pattern.depthShift || 0) * 36;
+        depthPreset.zEnd += (pattern.depthShift || 0) * 48;
+        if ((pattern.depthShift || 0) > 0) {
+          depthPreset.scaleEnd = Math.min(depthPreset.scaleEnd * 1.06, 1.8);
+        } else if ((pattern.depthShift || 0) < 0) {
+          depthPreset.scaleStart = Math.max(depthPreset.scaleStart * .96, .34);
+        }
 
         const meteor = document.createElement('span');
         meteor.className = 'meteor';
@@ -3568,7 +3667,7 @@
         }, { once: true });
       };
 
-      paintMeteorStory();
+      scheduleMeteorStory();
       if (isCompactHero) {
         window.setTimeout(spawn, 120);
       } else {

@@ -3293,9 +3293,9 @@
 
       .hero h1{
         max-width:100%;
-        min-height:2.55em;
-        font-size:clamp(16px, 4.5vw, 19px);
-        line-height:1.08;
+        min-height:2.35em;
+        font-size:clamp(13px, 3.8vw, 15px);
+        line-height:1.12;
         overflow-wrap:anywhere;
         word-break:normal;
         line-break:auto;
@@ -4324,35 +4324,95 @@
         meteorStoryCopy.textContent = story.copy;
       };
 
+      let meteorStoryTimer = 0;
+      const scheduleMeteorStory = () => {
+        paintMeteorStory();
+        window.clearTimeout(meteorStoryTimer);
+        meteorStoryTimer = window.setTimeout(scheduleMeteorStory, rand(3000, 5000));
+      };
+
       const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
       const meteorRoutes = [
         {
-          label: 'upper-right',
+          label: 'right-flat',
           sx: [82, 98],
-          sy: [6, 20],
-          dx: [-86, -52],
-          dy: [-8, 5]
+          sy: [10, 22],
+          dx: [-92, -60],
+          dy: [-4, 4],
+          angleFactor: .64,
+          depthShift: -1
         },
         {
-          label: 'mid-right',
-          sx: [79, 97],
+          label: 'right-down-left',
+          sx: [78, 97],
           sy: [18, 34],
-          dx: [-84, -48],
-          dy: [-6, 6]
+          dx: [-80, -46],
+          dy: [22, 54],
+          angleFactor: .76,
+          depthShift: 0
+        },
+        {
+          label: 'right-up-left',
+          sx: [76, 96],
+          sy: [28, 48],
+          dx: [-78, -42],
+          dy: [-58, -18],
+          angleFactor: .76,
+          depthShift: 1
+        },
+        {
+          label: 'left-down-right',
+          sx: [2, 18],
+          sy: [14, 28],
+          dx: [58, 96],
+          dy: [18, 60],
+          angleFactor: .72,
+          depthShift: 0
+        },
+        {
+          label: 'left-up-right',
+          sx: [2, 18],
+          sy: [34, 54],
+          dx: [58, 96],
+          dy: [-58, -16],
+          angleFactor: .72,
+          depthShift: -1
         },
         {
           label: 'core-near',
-          sx: [66, 90],
+          sx: [64, 90],
           sy: [22, 42],
-          dx: [-76, -34],
-          dy: [-3, 3]
+          dx: [-72, -32],
+          dy: [-10, 10],
+          angleFactor: .86,
+          depthShift: 1
         },
         {
-          label: 'lower-right',
-          sx: [76, 96],
-          sy: [34, 58],
-          dx: [-82, -44],
-          dy: [-3, 5]
+          label: 'left-flat',
+          sx: [2, 18],
+          sy: [30, 52],
+          dx: [58, 92],
+          dy: [-4, 4],
+          angleFactor: .64,
+          depthShift: -1
+        },
+        {
+          label: 'front-back',
+          sx: [58, 82],
+          sy: [10, 28],
+          dx: [-34, 30],
+          dy: [18, 66],
+          angleFactor: .42,
+          depthShift: 2
+        },
+        {
+          label: 'back-front',
+          sx: [22, 46],
+          sy: [18, 42],
+          dx: [-20, 24],
+          dy: [-54, -18],
+          angleFactor: .48,
+          depthShift: -2
         }
       ];
 
@@ -4406,7 +4466,9 @@
             sx: [sourceXMin, sourceXMax],
             sy: [sourceYMin, sourceYMax],
             dx: [pattern.dx[0] * widen, pattern.dx[1] * widen],
-            dy: [pattern.dy[0] * (mobileViewport ? .50 : .88), pattern.dy[1] * (mobileViewport ? .50 : .88)]
+            dy: [pattern.dy[0] * (mobileViewport ? .50 : .88), pattern.dy[1] * (mobileViewport ? .50 : .88)],
+            angleFactor: pattern.angleFactor,
+            depthShift: pattern.depthShift || 0
           };
         };
 
@@ -4431,7 +4493,6 @@
       const spawn = (forceFeature = false, forcedPatternIndex = null) => {
         if (activeMeteors >= 3) return;
 
-        paintMeteorStory();
         maybeStartPeak();
 
         const rect = hero.getBoundingClientRect();
@@ -4493,7 +4554,7 @@
         );
         const dx = ex - sx;
         const dy = ey - sy;
-        const angle = Math.atan2(dy * (mobileViewport ? .34 : .72), dx) * 180 / Math.PI;
+        const angle = Math.atan2(dy * (pattern.angleFactor || (mobileViewport ? .34 : .72)), dx) * 180 / Math.PI;
         const depthMode = pick(['far', 'mid', 'close']);
           const isFeatureMeteor = forceFeature || (mobileViewport ? Math.random() < .55 : (Math.random() < .35 || inPeak()));
           const isFireball = isFeatureMeteor && Math.random() < (mobileViewport ? .16 : .50);
@@ -4509,6 +4570,13 @@
             depthPreset.scaleEnd = Math.min(depthPreset.scaleEnd * 1.08, 1.72);
             depthPreset.blurStart = Math.max(depthPreset.blurStart * 0.42, 0.24);
             depthPreset.blurEnd = Math.max(depthPreset.blurEnd * 0.34, 0.015);
+          }
+          depthPreset.zStart += (pattern.depthShift || 0) * 36;
+          depthPreset.zEnd += (pattern.depthShift || 0) * 48;
+          if ((pattern.depthShift || 0) > 0) {
+            depthPreset.scaleEnd = Math.min(depthPreset.scaleEnd * 1.06, 1.8);
+          } else if ((pattern.depthShift || 0) < 0) {
+            depthPreset.scaleStart = Math.max(depthPreset.scaleStart * .96, .34);
           }
           const tailLength = isFeatureMeteor
           ? rand(mobileViewport ? 2.6 : 1.38, mobileViewport ? 3.8 : 1.92)
@@ -4591,7 +4659,7 @@
         }, { once: true });
       };
 
-      paintMeteorStory();
+      scheduleMeteorStory();
       if (mobileViewport) {
         const kickMobileMeteor = () => {
           spawn(Math.random() < 0.62);
@@ -4605,6 +4673,7 @@
       }
     })();
   </script>
+  <script src="site.js"></script>
 </body>
 </html>
 
