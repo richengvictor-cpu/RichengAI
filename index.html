@@ -273,21 +273,24 @@
       0%{
         opacity:0;
         transform:translate3d(0,0,0) rotate(var(--rot, 18deg)) scale(var(--scale-start, .58));
-        filter:blur(var(--blur-start, .12px)) drop-shadow(0 0 4px rgba(89,212,204,.18));
+        filter:blur(var(--blur-start, .08px)) drop-shadow(0 0 8px rgba(89,212,204,.22));
       }
-      12%{
-        opacity:.52;
+      8%{
+        opacity:.24;
       }
-      22%{
+      16%{
+        opacity:.76;
+      }
+      24%{
+        opacity:1;
+      }
+      70%{
         opacity:.92;
-      }
-      62%{
-        opacity:.88;
       }
       100%{
         opacity:0;
         transform:translate3d(calc(var(--dx, 880px) * 1), calc(var(--dy, 420px) * 1), 0) rotate(var(--rot, 18deg)) scale(var(--scale-end, 1.18));
-        filter:blur(var(--blur-end, 0px)) drop-shadow(0 0 5px rgba(89,212,204,.14));
+        filter:blur(var(--blur-end, 0px)) drop-shadow(0 0 8px rgba(89,212,204,.18));
       }
     }
     @keyframes meteorGlow{
@@ -2925,31 +2928,31 @@
       }
 
       .meteor{
-        height:3px;
+        height:4px;
         opacity:1;
-        filter:drop-shadow(0 0 10px rgba(89,212,204,.28));
-        animation:meteorFlyMobile 1.48s linear forwards;
+        filter:drop-shadow(0 0 14px rgba(89,212,204,.34));
+        animation:meteorFlyMobile 2.08s linear forwards;
       }
 
       .meteor.meteor-feature{
-        height:6px;
+        height:7px;
         opacity:1;
-        filter:drop-shadow(0 0 18px rgba(89,212,204,.46));
-        animation-duration:1.74s;
+        filter:drop-shadow(0 0 22px rgba(89,212,204,.52));
+        animation-duration:2.54s;
       }
 
       .meteor.meteor-feature::before{
-        height:30px;
-        width:178%;
-        opacity:.60;
-        filter:blur(3px);
+        height:42px;
+        width:240%;
+        opacity:.74;
+        filter:blur(2px);
       }
 
       .meteor.meteor-feature::after{
-        width:76px;
-        height:48px;
+        width:92px;
+        height:60px;
         opacity:1;
-        filter:blur(1.5px);
+        filter:blur(1px);
       }
 
       .hero h1{
@@ -4033,19 +4036,21 @@
         const depthMode = pick(['far', 'mid', 'close']);
           const isFeatureMeteor = forceFeature || (!mobileViewport && (Math.random() < .35 || inPeak()));
           const depthPreset = depthMode === 'far'
-            ? { zStart: rand(-420, -260), zEnd: rand(90, 170), scaleStart: rand(.40, .56), scaleEnd: rand(1.12, 1.28), blurStart: rand(2.4, 3.5), blurEnd: rand(.10, .22), width: mobileViewport ? rand(120, 160) : rand(122, 182), height: mobileViewport ? rand(1.35, 1.75) : rand(1.9, 2.35) }
+          ? { zStart: rand(-420, -260), zEnd: rand(90, 170), scaleStart: rand(.40, .56), scaleEnd: rand(1.12, 1.28), blurStart: rand(2.4, 3.5), blurEnd: rand(.10, .22), width: mobileViewport ? rand(120, 160) : rand(122, 182), height: mobileViewport ? rand(1.35, 1.75) : rand(1.9, 2.35) }
             : depthMode === 'mid'
-              ? { zStart: rand(-300, -170), zEnd: rand(60, 130), scaleStart: rand(.50, .68), scaleEnd: rand(1.18, 1.38), blurStart: rand(1.8, 2.6), blurEnd: rand(.08, .18), width: mobileViewport ? rand(140, 190) : rand(160, 236), height: mobileViewport ? rand(1.45, 1.95) : rand(2.0, 2.5) }
-              : { zStart: rand(-220, -100), zEnd: rand(120, 220), scaleStart: rand(.60, .82), scaleEnd: rand(1.26, 1.58), blurStart: rand(1.2, 1.9), blurEnd: rand(.06, .16), width: mobileViewport ? rand(156, 214) : rand(190, 286), height: mobileViewport ? rand(1.55, 2.05) : rand(2.1, 2.8) };
+              ? { zStart: rand(-300, -170), zEnd: rand(60, 130), scaleStart: rand(.50, .68), scaleEnd: rand(1.18, 1.38), blurStart: rand(1.8, 2.6), blurEnd: rand(.08, .18), width: mobileViewport ? rand(148, 212) : rand(160, 236), height: mobileViewport ? rand(2.0, 2.7) : rand(2.0, 2.5) }
+              : { zStart: rand(-220, -100), zEnd: rand(120, 220), scaleStart: rand(.60, .82), scaleEnd: rand(1.26, 1.58), blurStart: rand(1.2, 1.9), blurEnd: rand(.06, .16), width: mobileViewport ? rand(170, 246) : rand(190, 286), height: mobileViewport ? rand(2.2, 3.1) : rand(2.1, 2.8) };
           if (isFeatureMeteor) {
             depthPreset.width *= mobileViewport ? 1.02 : 1.14;
-            depthPreset.height *= 1.15;
+            depthPreset.height *= mobileViewport ? 1.24 : 1.15;
             depthPreset.scaleStart = Math.min(depthPreset.scaleStart * 1.04, 1);
             depthPreset.scaleEnd = Math.min(depthPreset.scaleEnd * 1.08, 1.72);
             depthPreset.blurStart = Math.max(depthPreset.blurStart * 0.42, 0.24);
             depthPreset.blurEnd = Math.max(depthPreset.blurEnd * 0.34, 0.015);
           }
-          const tailLength = isFeatureMeteor ? rand(1.38, 1.92) : rand(0.88, 1.18);
+          const tailLength = isFeatureMeteor
+            ? rand(mobileViewport ? 2.1 : 1.38, mobileViewport ? 3.0 : 1.92)
+            : rand(mobileViewport ? 1.08 : 0.88, mobileViewport ? 1.48 : 1.18);
 
         const meteor = document.createElement('span');
         meteor.className = isFeatureMeteor ? 'meteor meteor-feature' : 'meteor';
@@ -4064,10 +4069,10 @@
         meteor.style.width = `${depthPreset.width}px`;
         meteor.style.height = `${depthPreset.height}px`;
         meteor.style.animationDuration = isFeatureMeteor
-          ? `${rand(mobileViewport ? 1.2 : 1.02, mobileViewport ? 1.62 : 1.18)}s`
+          ? `${rand(mobileViewport ? 1.95 : 1.02, mobileViewport ? 2.54 : 1.18)}s`
           : `${rand(mobileViewport ? 1.0 : 1.16, mobileViewport ? 1.24 : 1.34)}s`;
         meteor.style.filter = isFeatureMeteor
-          ? 'drop-shadow(0 0 10px rgba(89,212,204,.40))'
+          ? 'drop-shadow(0 0 16px rgba(89,212,204,.56))'
           : 'drop-shadow(0 0 4px rgba(89,212,204,.16))';
         meteor.style.opacity = '0';
 
@@ -4109,6 +4114,7 @@
         };
         window.setTimeout(kickMobileMeteor, 140);
         window.setTimeout(kickMobileMeteor, 780);
+        window.setTimeout(() => spawn(true, 1), 5800);
         window.setInterval(kickMobileMeteor, 2200);
         window.setTimeout(() => {
           if (!inPeak()) hero.classList.remove('peak-night');
