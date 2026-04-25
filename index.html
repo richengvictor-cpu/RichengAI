@@ -294,10 +294,21 @@
       }
     }
     @keyframes meteorGlow{
-      0%{ opacity:0; transform:scale(.65); }
-      18%{ opacity:.55; transform:scale(.88); }
-      42%{ opacity:.35; transform:scale(1); }
-      100%{ opacity:0; transform:scale(1.22); }
+      0%{ opacity:0; transform:scale(.55); }
+      14%{ opacity:0; transform:scale(.62); }
+      28%{ opacity:.42; transform:scale(.82); }
+      46%{ opacity:.30; transform:scale(.94); }
+      70%{ opacity:.14; transform:scale(1.05); }
+      100%{ opacity:0; transform:scale(1.16); }
+    }
+    @keyframes meteorGlowMobile{
+      0%{ opacity:0; transform:scale(.45); }
+      16%{ opacity:0; transform:scale(.52); }
+      28%{ opacity:.26; transform:scale(.72); }
+      42%{ opacity:.44; transform:scale(.88); }
+      62%{ opacity:.24; transform:scale(1); }
+      82%{ opacity:.10; transform:scale(1.08); }
+      100%{ opacity:0; transform:scale(1.14); }
     }
     @keyframes haloPulse{
       0%{ opacity:.28; transform:scale(.96); }
@@ -913,7 +924,7 @@
       border-radius:50%;
       background:radial-gradient(circle, rgba(255,255,255,.32), rgba(255,255,255,.14) 34%, rgba(89,212,204,.08) 60%, transparent 82%);
       filter:blur(4px);
-      animation:meteorGlow 3.4s linear forwards;
+      animation:meteorGlow var(--meteor-duration, 1.15s) linear forwards;
       transform-origin:center center;
     }
 
@@ -2931,7 +2942,7 @@
         height:4px;
         opacity:1;
         filter:drop-shadow(0 0 14px rgba(89,212,204,.34));
-        animation:meteorFlyMobile 2.08s linear forwards;
+        animation:meteorFlyMobile var(--meteor-duration, 2.08s) linear forwards;
       }
 
       .meteor.meteor-feature{
@@ -2953,6 +2964,12 @@
         height:60px;
         opacity:1;
         filter:blur(1px);
+        animation:meteorGlowMobile var(--meteor-duration, 2.54s) linear forwards;
+      }
+
+      .meteor::after{
+        animation:meteorGlowMobile var(--meteor-duration, 2.08s) linear forwards;
+        opacity:0;
       }
 
       .hero h1{
@@ -3951,28 +3968,28 @@
           label: 'upper-right',
           sx: [82, 98],
           sy: [6, 20],
-          dx: [-62, -36],
+          dx: [-78, -44],
           dy: [-8, 5]
         },
         {
           label: 'mid-right',
           sx: [79, 97],
           sy: [18, 34],
-          dx: [-58, -30],
+          dx: [-76, -42],
           dy: [-6, 6]
         },
         {
           label: 'core-near',
           sx: [66, 90],
           sy: [22, 42],
-          dx: [-40, -20],
+          dx: [-62, -28],
           dy: [-3, 3]
         },
         {
           label: 'lower-right',
           sx: [76, 96],
           sy: [34, 58],
-          dx: [-50, -26],
+          dx: [-70, -36],
           dy: [-3, 5]
         }
       ];
@@ -4027,7 +4044,7 @@
         const ex = clamp(
           sx + rect.width * rand(pattern.dx[0] / 100, pattern.dx[1] / 100),
           rect.width * -0.26,
-          rect.width * 1.22
+          rect.width * (mobileViewport ? 1.38 : 1.28)
         );
         const ey = clamp(sy + rect.height * rand(pattern.dy[0] / 100, pattern.dy[1] / 100), rect.height * 0.14, rect.height * 0.64);
         const dx = ex - sx;
@@ -4071,6 +4088,7 @@
         meteor.style.animationDuration = isFeatureMeteor
           ? `${rand(mobileViewport ? 1.95 : 1.02, mobileViewport ? 2.54 : 1.18)}s`
           : `${rand(mobileViewport ? 1.0 : 1.16, mobileViewport ? 1.24 : 1.34)}s`;
+        meteor.style.setProperty('--meteor-duration', meteor.style.animationDuration);
         meteor.style.filter = isFeatureMeteor
           ? 'drop-shadow(0 0 16px rgba(89,212,204,.56))'
           : 'drop-shadow(0 0 4px rgba(89,212,204,.16))';
