@@ -3644,8 +3644,8 @@
         activeMeteors += 1;
         layer.appendChild(meteor);
 
-        const chainChance = inPeak() ? 0 : (isCompactHero ? 0.10 : 0.16);
-        const chainDelay = rand(5200, 7600);
+        const chainChance = inPeak() ? 0 : (isCompactHero ? 0.06 : 0.12);
+        const chainDelay = rand(6200, 8800);
 
         if (activeMeteors < 3 && Math.random() < chainChance) {
           window.setTimeout(spawn, chainDelay);

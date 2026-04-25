@@ -4629,8 +4629,8 @@
         activeMeteors += 1;
         layer.appendChild(meteor);
 
-        const chainChance = mobileViewport ? 0.48 : (inPeak() ? 0.64 : 0.28);
-        const chainDelay = mobileViewport ? rand(1000, 2100) : (inPeak() ? rand(1500, 3500) : rand(4000, 7000));
+        const chainChance = mobileViewport ? 0.24 : (inPeak() ? 0.64 : 0.28);
+        const chainDelay = mobileViewport ? rand(1800, 3400) : (inPeak() ? rand(1500, 3500) : rand(4000, 7000));
 
         if (activeMeteors < 3 && Math.random() < chainChance) {
           window.setTimeout(spawn, chainDelay);
@@ -4662,12 +4662,11 @@
       scheduleMeteorStory();
       if (mobileViewport) {
         const kickMobileMeteor = () => {
-          spawn(Math.random() < 0.62);
-          window.setTimeout(kickMobileMeteor, rand(1100, 2200));
+          spawn(Math.random() < 0.48);
+          window.setTimeout(kickMobileMeteor, rand(1800, 3200));
         };
-        window.setTimeout(kickMobileMeteor, 260);
-        window.setTimeout(kickMobileMeteor, 1300);
-        window.setTimeout(kickMobileMeteor, 2500);
+        window.setTimeout(kickMobileMeteor, 420);
+        window.setTimeout(kickMobileMeteor, 2200);
       } else {
         window.setTimeout(spawn, rand(240, 900));
       }
